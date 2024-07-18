@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Arthemis'; /* Give a name to your font */
+  src: url('./fonts/Arthemis-PKY27.woff2') format('woff2'); /* Adjust the path as needed */
+  font-weight: normal;
+  font-style: normal;
+}

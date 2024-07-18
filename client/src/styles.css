@@ -1,0 +1,7 @@
+/* styles.css */
+.tablet-center {
+    @media (max-width: 768px) {
+      text-align: center;
+    }
+  }
+  
