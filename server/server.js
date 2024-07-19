@@ -14,9 +14,10 @@ if (process.env.NODE_ENV !== "production") {
 }
 
 const clerkSecretKey = process.env.CLERK_SECRET_KEY;
+const clerkPublishableKey = process.env.VITE_CLERK_PUBLISHABLE_KEY;
 
-if (!clerkSecretKey) {
-  console.error("Clerk secret key is not set");
+if (!clerkSecretKey || !clerkPublishableKey) {
+  console.error("Clerk keys are not set");
   process.exit(1);
 }
 
@@ -80,7 +81,7 @@ app.get("/protected-endpoint", ClerkExpressRequireAuth(), (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  const buildPath = path.join(__dirname, "public", "dist"); // Changed to 'dist'
+  const buildPath = path.join(__dirname, "public", "build");
   app.use(express.static(buildPath));
 
   app.get("*", (req, res) => {
