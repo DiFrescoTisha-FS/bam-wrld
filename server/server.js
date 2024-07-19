@@ -80,11 +80,11 @@ app.get("/protected-endpoint", ClerkExpressRequireAuth(), (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  const distPath = path.join(__dirname, "public", "dist");
-  app.use(express.static(distPath));
+  const buildPath = path.join(__dirname, "public", "dist"); // Changed to 'dist'
+  app.use(express.static(buildPath));
 
   app.get("*", (req, res) => {
-    res.sendFile(path.join(distPath, "index.html"), (err) => {
+    res.sendFile(path.join(buildPath, "index.html"), (err) => {
       if (err) {
         res.status(500).send(err);
       }
