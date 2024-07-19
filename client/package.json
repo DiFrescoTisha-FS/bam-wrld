@@ -6,15 +6,15 @@
   "scripts": {
     "start": "vite",
     "build": "vite build",
-    "build:dev": "env-cmd -f .env.development vite build --output-path build-dev",
-    "build:prod": "env-cmd -f .env.production vite build",
+    "build:dev": "env-cmd -f ./.env.development vite build --output-path build-dev",
+    "build:prod": "env-cmd -f ./.env.production vite build",
     "test": "vite test",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "eject": "vite eject",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build:memory": "export NODE_OPTIONS=--max_old_space_size=4096 && vite build",
-    "start:dev": "env-cmd -f .env.development vite start",
-    "start:prod": "env-cmd -f .env.production vite start"
+    "start:dev": "env-cmd -f ./.env.development vite",
+    "start:prod": "env-cmd -f ./.env.production vite"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.8",

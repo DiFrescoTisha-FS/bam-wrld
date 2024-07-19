@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "start:dev": "env-cmd -f .env.development nodemon server.js",
-    "start:prod": "env-cmd -f .env NODE_ENV=production node server.js",
-    "dev": "env-cmd -f .env.development DEBUG=app:server nodemon server.js"
+    "start:dev": "env-cmd -f ./.env.development nodemon server.js",
+    "start:prod": "env-cmd -f ./.env NODE_ENV=production node server.js",
+    "dev": "env-cmd -f ../.env.development DEBUG=app:server nodemon server.js"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.8",

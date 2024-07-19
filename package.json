@@ -8,8 +8,8 @@
     "npm": "10.x"
   },
   "scripts": {
-    "start": "node server/server.js",
-    "start:dev": "DEBUG=express:* env-cmd -f .env.development nodemon server/server.js",
+    "start": "env-cmd -f ./.env node server/server.js",
+    "start:dev": "DEBUG=express:* env-cmd -f ./.env.development nodemon server/server.js",
     "heroku-postbuild": "cd client && npm install && npm run build:memory && mv dist ../server/public/"
   },
   "dependencies": {
