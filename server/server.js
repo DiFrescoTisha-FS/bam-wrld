@@ -9,8 +9,8 @@ const authRoutes = require("./api/routes/authRoutes.js");
 const commentRatingRoutes = require("./api/routes/commentRatingRoutes.js");
 
 // Load environment variables from .env.development if not in production
-if (process.env.NODE_ENV !== "production") {
-  require("dotenv").config({ path: path.join(__dirname, ".env.development") });
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
 }
 
 const app = express();
