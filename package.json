@@ -10,7 +10,7 @@
     "scripts": {
       "start": "node server/server.js",
       "start:dev": "DEBUG=express:* env-cmd -f .env.development nodemon server/server.js",
-      "heroku-postbuild": "cd client && npm install && npm run build:memory && mv build ../server/public/"
+      "heroku-postbuild": "cd client && npm install && npm run build:memory && mv dist ../server/public/"
     },
     "dependencies": {
       "@clerk/clerk-sdk-node": "^5.0.16",

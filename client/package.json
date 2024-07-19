@@ -4,9 +4,17 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "start": "vite",
     "build": "vite build",
-    "serve": "vite preview"
+    "build:dev": "env-cmd -f .env.development vite build --mode development",
+    "build:prod": "env-cmd -f .env.production vite build --mode production",
+    "test": "vitest",
+    "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
+    "eject": "echo 'Eject is not supported in Vite'",
+    "analyze": "vite build --mode analyze",
+    "build:memory": "export NODE_OPTIONS=--max_old_space_size=4096 && vite build",
+    "start:dev": "env-cmd -f .env.development vite",
+    "start:prod": "env-cmd -f .env.production vite"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.8",
