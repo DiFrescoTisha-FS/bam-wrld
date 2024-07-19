@@ -8,11 +8,11 @@
     "build": "vite build",
     "build:dev": "env-cmd -f .env.development vite build --mode development",
     "build:prod": "env-cmd -f .env.production vite build --mode production",
+    "build:memory": "export NODE_OPTIONS=--max_old_space_size=4096 && vite build",
     "test": "vitest",
     "lint": "eslint ./src --ext .js,.jsx,.ts,.tsx",
     "eject": "echo 'Eject is not supported in Vite'",
     "analyze": "vite build --mode analyze",
-    "heroku-postbuild": "cd client && npm install && npm run build:memory && mv dist ../server/public/",
     "start:dev": "env-cmd -f .env.development vite",
     "start:prod": "env-cmd -f .env.production vite"
   },
