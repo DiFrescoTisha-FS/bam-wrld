@@ -13,14 +13,6 @@ if (process.env.NODE_ENV !== "production") {
   require("dotenv").config({ path: path.join(__dirname, ".env.development") });
 }
 
-const clerkSecretKey = process.env.CLERK_SECRET_KEY;
-const clerkPublishableKey = process.env.VITE_CLERK_PUBLISHABLE_KEY;
-
-if (!clerkSecretKey || !clerkPublishableKey) {
-  console.error("Clerk keys are not set");
-  process.exit(1);
-}
-
 const app = express();
 
 console.log("Environment Variables:");
@@ -81,7 +73,7 @@ app.get("/protected-endpoint", ClerkExpressRequireAuth(), (req, res) => {
 });
 
 if (process.env.NODE_ENV === "production") {
-  const buildPath = path.join(__dirname, "public", "build");
+  const buildPath = path.join(__dirname, "public", "dist");
   app.use(express.static(buildPath));
 
   app.get("*", (req, res) => {

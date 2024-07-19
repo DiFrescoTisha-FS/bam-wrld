@@ -28,6 +28,7 @@
     "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0"
   }
 }
