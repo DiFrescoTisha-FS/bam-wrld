@@ -60,7 +60,7 @@ app.use(express.urlencoded({ extended: false }));
 
 app.use(
   ClerkExpressWithAuth({
-    apiKey: clerkSecretKey,
+    apiKey: process.env.CLERK_SECRET_KEY,
     apiUrl: process.env.CLERK_API_URL,
     jwtKey: process.env.JWKS_URL,
   })
