@@ -56,35 +56,6 @@ html, body {
   /* text-align: center; */
 }
 
-/* @media (max-width: 1024px) {
-  .tablet\:text-center {
-    text-align: center;
-  }
-} */
-
-/* @media (max-width: 768px) {
-  .phone\:text-center {
-    text-align: center;
-  }
-} */
-
-/* @media (max-width: 480px) {
-  .small-phone\:text-center {
-    text-align: center;
-  }
-} */
-
-/* * {
-  border: 1px solid red;
-} */
-/* .main-content {
-  padding-top: 80px;
-}
-
-.small-text {
-  font-size: 10px;
-} */
-
 .directive {
   font-size: 2rem;
   color: #ac94f4;
@@ -141,3 +112,4 @@ html, body {
     display: none;
   }
 }
+
