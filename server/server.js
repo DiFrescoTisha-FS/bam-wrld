@@ -28,6 +28,7 @@ console.log("CLOUDINARY_NAME:", process.env.CLOUDINARY_NAME);
 console.log("CLOUDINARY_KEY:", process.env.CLOUDINARY_KEY);
 console.log("CLOUDINARY_SECRET:", process.env.CLOUDINARY_SECRET);
 console.log("ALLOWED_ORIGINS:", process.env.ALLOWED_ORIGINS);
+console.log('VITE_CLERK_PUBLISHABLE_KEY:', process.env.VITE_CLERK_PUBLISHABLE_KEY);
 
 connectDB();
 
