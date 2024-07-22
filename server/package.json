@@ -9,9 +9,9 @@
   },
   "scripts": {
     "start": "node server.js",
-    "start:dev": "env-cmd -f .env.development nodemon server.js",
-    "start:prod": "env-cmd -f .env NODE_ENV=production node server.js",
-    "dev": "env-cmd -f .env.development DEBUG=app:server nodemon server.js"
+    "start:dev": "env-cmd -f ./.env.development nodemon server.js",
+    "start:prod": "node server.js",
+    "dev": "env-cmd -f ../.env.development DEBUG=app:server nodemon server.js"
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.8",
@@ -23,6 +23,7 @@
     "dotenv": "^16.4.5",
     "dotenv-flow": "^4.1.0",
     "express": "^4.19.2",
+    "firebase-admin": "^12.2.0",
     "jsonwebtoken": "^9.0.2",
     "jwks-rsa": "^3.1.0",
     "lodash": "^4.17.21",

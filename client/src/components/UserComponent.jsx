@@ -1,13 +1,16 @@
+// src/components/UserComponent.js
+
 import React, { useState, useRef, useEffect } from 'react';
 import { useUserContext } from '../contexts/UserContext';
-import { useClerk } from "@clerk/clerk-react";
+import { auth } from "../firebase";
+import { signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FaChevronDown } from 'react-icons/fa';
 import { IoMdLogOut } from 'react-icons/io';
+import axios from 'axios';
 
 const UserComponent = () => {
-  const { state } = useUserContext();
-  const { currentUser } = state; // Ensure this is being used
-  const { signOut, openSignIn } = useClerk();
+  const { state, dispatch } = useUserContext();
+  const { currentUser } = state;
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef();
 
@@ -21,6 +24,33 @@ const UserComponent = () => {
     }
   };
 
+  const handleSignOut = async () => {
+    try {
+      await signOut(auth);
+    } catch (error) {
+      console.error("Error signing out: ", error);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      dispatch({ type: "SET_CURRENT_USER", payload: user });
+  
+      // Send user info to the backend
+      await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/save-user`, {
+        uid: user.uid,
+        displayName: user.displayName,
+        email: user.email,
+        photoURL: user.photoURL
+      });
+    } catch (error) {
+      console.error("Error signing in with Google: ", error);
+    }
+  };
+
   useEffect(() => {
     window.addEventListener("mousedown", handleClickOutside);
     return () => {
@@ -28,41 +58,31 @@ const UserComponent = () => {
     };
   }, []);
 
-  useEffect(() => {
-    console.log('Current user:', currentUser);
-  }, [currentUser]);
-
   return (
-    <div className="lg:block relative bg-black">
+    <div className="relative">
       {currentUser ? (
-        <div 
-          className="flex items-center border-2 border-[#ac94f4] space-x-4 opacity-90 cursor-pointer hover:opacity-60 hover:text-black rounded-full p-1 pr-2 mt-4" 
-          onClick={toggleDropdown}
-        >
-          <img className="rounded-full w-8 h-8" src={currentUser.imageUrl} alt={currentUser.fullName} />
-          <span className="text-[#ac94f4]">{currentUser.fullName}</span>
-          <FaChevronDown />
+        <div className="signed-in-user" onClick={toggleDropdown}>
+          <img src={currentUser.photoURL} alt={currentUser.displayName} className="w-10 h-10 rounded-full" />
+          <span className="hidden lg:block ml-2">{currentUser.displayName}</span>
+          <FaChevronDown className="ml-2" />
           {dropdownOpen && (
-            <div 
-              ref={dropdownRef} 
-              className="absolute top-10 right-0 mt-2 py-2 w-48 bg-[#ac94f4] rounded-full shadow-xl z-20"
-            >
-              <button 
-                onClick={() => signOut()} 
-                className="flex items-center px-2 py-[1px] text-md font-md text-[#010606] hover:text-[#010606] hover:opacity-60"
+            <div ref={dropdownRef} className="dropdown">
+              <button
+                className="flex items-center w-full px-4 py-2 text-sm text-black hover:bg-gray-200"
+                onClick={handleSignOut}
               >
-                <IoMdLogOut size={28} className="mr-2" color="#010606" />
+                <IoMdLogOut size={20} className="mr-2" />
                 <span>Logout</span>
               </button>
             </div>
           )}
         </div>
       ) : (
-        <button 
-          className="flex items-center justify-center gap-2 px-2 py-2.5 rounded-full bg-[#010606] p-1 mt-3 text-[#ac94f4] border-2 border-[#ac94f4] text-md shadow-md shadow-glow cursor-pointer transition-colors hover:opacity-60 hover:border-[#ac94f4] hover:shadow-md" 
-          onClick={() => openSignIn()}
+        <button
+          className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#010606] text-[#ac94f4] border-2 border-[#ac94f4] text-md shadow-md cursor-pointer transition-colors hover:opacity-60"
+          onClick={handleGoogleSignIn}
         >
-          <span className="block text-[#ac94f4] pr-2">Sign in</span>
+          <span>Sign in with Google</span>
         </button>
       )}
     </div>

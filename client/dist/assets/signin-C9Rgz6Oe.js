@@ -1,0 +1,1 @@
+import{j as n,S as i}from"./index-Bfm6BA1g.js";const r=()=>n.jsxs("div",{children:[n.jsx("h1",{children:"Sign In"}),n.jsx(i,{path:"/sign-in",routing:"path",signUpUrl:"/sign-up"})]});export{r as default};

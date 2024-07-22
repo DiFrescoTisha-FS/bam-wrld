@@ -1,3 +1,5 @@
+// src/components/navbar/Navbar.js
+
 import React, { useState, useEffect, useRef, useMemo } from "react";
 import { useUserContext } from "../../contexts/UserContext";
 import { generateImageUrl } from '../../utils/cloudinarySetup';

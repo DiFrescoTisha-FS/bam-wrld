@@ -119,6 +119,10 @@ export const NavBtn = styled.nav`
     align-items: center;
     margin-bottom: 14px;
 
+    ${media_queries.largeTablet`
+      display: none;
+  `}
+
     ${media_queries.tablet`
         display: none;
     `}

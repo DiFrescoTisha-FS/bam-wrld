@@ -56,35 +56,6 @@ html, body {
   /* text-align: center; */
 }
 
-/* @media (max-width: 1024px) {
-  .tablet\:text-center {
-    text-align: center;
-  }
-} */
-
-/* @media (max-width: 768px) {
-  .phone\:text-center {
-    text-align: center;
-  }
-} */
-
-/* @media (max-width: 480px) {
-  .small-phone\:text-center {
-    text-align: center;
-  }
-} */
-
-/* * {
-  border: 1px solid red;
-} */
-/* .main-content {
-  padding-top: 80px;
-}
-
-.small-text {
-  font-size: 10px;
-} */
-
 .directive {
   font-size: 2rem;
   color: #ac94f4;
@@ -141,3 +112,117 @@ html, body {
     display: none;
   }
 }
+#root {
+  position: relative;
+  z-index: 10; /* Ensure it's above the twinkling background */
+}
+
+button {
+  background-color: #010606;
+  color: #ac94f4;
+  border: 2px solid #ac94f4;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  shadow-md: shadow-glow;
+  margin-top: 6px;
+}
+
+button:hover {
+  background-color: #000;
+  opacity: 0.6;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(172, 148, 244, 0.6);
+}
+
+button span {
+  color: #ac94f4;
+}
+
+.signed-in-user {
+  display: flex;
+  align-items: center;
+  padding: 5px 20px; /* Adjust padding as needed */
+  border: 2px solid #ac94f4;
+  border-radius: 50px; /* Make the corners more rounded */
+  cursor: pointer;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  background-color: #010606;
+  margin-top: 10px;
+  color: #ac94f4;
+  box-shadow: 0 0 20px #ac94f4; /* Updated for glow effect */
+  opacity: 0.9;
+  position: relative; /* Ensure relative positioning */
+}
+
+.signed-in-user:hover {
+  background-color: #000;
+  opacity: 0.6;
+}
+
+.signed-in-user img {
+  border-radius: 50%;
+  width: 30px;
+  height: 30px;
+  margin-right: 8px;
+}
+
+.signed-in-user span {
+  color: #ac94f4;
+  margin-bottom: 2px;
+  font-size: 1.2em; /* Adjust font size as needed */
+  font-weight: 400; /* Semi-bold */
+}
+
+.signed-in-user .dropdown {
+  position: absolute;
+  top: 100%; /* Align it directly below the user button */
+  left: 0; /* Align to the left of the user button */
+  margin-top: 6px;
+  background-color: #010606; /* Match button background color */
+  color: black;
+  border-radius: 10px; /* Adjusted for the dropdown */
+  padding: 0; /* Remove padding from the dropdown container */
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  z-index: 20;
+  width: 100%; /* Match the width of the parent container */
+}
+
+.signed-in-user .dropdown button {
+  display: flex;
+  align-items: center;
+  justify-content: center; /* Center the content horizontally */
+  padding: 2px 20px; /* Match the padding of the user button */
+  background-color: transparent; /* Ensure background is transparent */
+  border: none; /* Remove border */
+  border-radius: 50px; /* Match the button border radius */
+  color: #ac94f4; /* Ensure the color matches the theme */
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  width: 100%; /* Make sure the button takes full width of the dropdown */
+  font-size: 1.2em; /* Adjust font size as needed */
+  font-weight: 400; /* Semi-bold */
+}
+
+.signed-in-user .dropdown button:hover {
+  opacity: 0.6;
+}
+
+.signed-in-user .dropdown button svg {
+  margin-right: 5px;
+  color: #ac94f4; /* Ensure icon color matches the theme */
+}
+
+
+
+
+

@@ -1,29 +1,27 @@
 const express = require("express");
-const CommentRating = require("../models/commentRating");
-const { ClerkExpressRequireAuth } = require('@clerk/clerk-sdk-node');
 const router = express.Router();
+const { requireAuth } = require("../middleware/authMiddleware");
+const CommentRating = require("../models/commentRating");
 
-// Add comment and rating
-router.post("/comment-rating", ClerkExpressRequireAuth(), async (req, res) => {
-  console.log("req.auth:", req.auth); // Debugging log
-  const { userId } = req.auth;
-  const { comment, rating } = req.body;
+router.post("/comment-rating", requireAuth, async (req, res) => {
+  const { userId, comment, rating } = req.body;
+
+  if (!userId || !comment || rating === undefined) {
+    console.error('Invalid request data:', req.body);
+    return res.status(400).json({ message: 'Invalid request data' });
+  }
+
   try {
-    if (!userId) {
-      console.log("User ID is missing");
-      return res.status(400).json({ message: "User ID is required" });
-    }
-    const newCommentRating = new CommentRating({
-      user: userId,
+    const commentRating = new CommentRating({
+      userId,
       comment,
-      rating,
+      rating
     });
-    const savedCommentRating = await newCommentRating.save();
-    console.log("Comment and rating saved:", savedCommentRating);
-    res.status(201).json(savedCommentRating);
+    await commentRating.save();
+    res.status(200).json({ message: 'Comment and rating submitted successfully' });
   } catch (error) {
-    console.error("Error saving comment and rating:", error);
-    res.status(500).json({ message: "Internal Server Error", error });
+    console.error('Error saving comment and rating:', error);
+    res.status(500).json({ message: 'Failed to submit comment and rating' });
   }
 });
 

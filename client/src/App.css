@@ -14,7 +14,27 @@ body{
   -ms-overflow-style: none; /* Internet Explorer and Edge */
 }
 
+body {
+  background-color: #010606; /* Match your app's theme */
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+.loading-screen {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #010606; /* Match the twinkling background color */
+  color: #fff; /* Ensure good contrast */
+  font-size: 24px;
+}
+
+
+
 /* Hide the vertical scrollbar for Webkit-based browsers */
 body::-webkit-scrollbar {
   display: none;
 }
+

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "start": "node server/server.js",
-    "start:dev": "DEBUG=express:* env-cmd -f .env.development nodemon server/server.js",
+    "start:dev": "DEBUG=express:* env-cmd -f ./.env.development nodemon server/server.js",
     "heroku-postbuild": "cd client && npm install && npm run build:memory && mv dist ../server/public/"
   },
   "dependencies": {
@@ -28,6 +28,7 @@
     "react-router-dom": "^6.25.1"
   },
   "devDependencies": {
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "env-cmd": "^10.1.0"
   }
 }
