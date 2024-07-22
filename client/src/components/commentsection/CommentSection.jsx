@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { useUserContext } from "../../contexts/UserContext";
 import Rating from "react-rating-stars-component";
 import { BsSendFill } from "react-icons/bs";
@@ -18,6 +18,7 @@ import {
   Heading,
 } from "../StyledComponents.jsx";
 import { CommentImgWrap } from "./CommentSectionElements.jsx";
+import "./comment.css"; // Import the CSS file
 
 const CommentSection = () => {
   const { state, setComment, setRating, handleCommentSubmit, setErrorMessage } = useUserContext();
@@ -70,6 +71,16 @@ const CommentSection = () => {
     }
     await handleCommentSubmit(event); // Call the submit function if the user is logged in
   };
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      if (errorMessage || successMessage) {
+        setErrorMessage("");
+      }
+    }, 3000);
+
+    return () => clearTimeout(timer);
+  }, [errorMessage, successMessage, setErrorMessage]);
 
   return (
     <SectionContainer id="comments">
@@ -138,12 +149,9 @@ const CommentSection = () => {
                 </div>
               )}
               <BtnWrap>
-                <button
-                  className="inline-flex items-center rounded-full bg-[#ac94f4] border border-[#010606] whitespace-nowrap px-4 py-2 mb-3 text-black gap-2 hover:bg-[#010606] hover:text-[#ac94f4]"
-                  type="submit"
-                >
-                  <BsSendFill size={20} className="text-black hover:text-[#ac94f4]" />
-                  <span className="text-black hover:text-[#ac94f4]">Send</span>
+                <button className="send-button" type="submit">
+                  <BsSendFill size={20} className="icon" />
+                  <span className="text-[#010606] hover:text-[#ac94f4]">Send</span>
                 </button>
               </BtnWrap>
               {errorMessage && (

@@ -3,7 +3,6 @@ import styled, { css } from 'styled-components';
 export const ButtonBaseStyles = css`
   border-radius: 50px;
   background: #ac94f4;
-  padding: 8px 10px;
   color: #010606;
   font-size: 14px;
   outline: none;
@@ -36,7 +35,6 @@ export const ButtonBaseStyles = css`
 
 export const CustomButton = styled.button`
   ${ButtonBaseStyles}
-  background-color: #ac94f4;
   color: black;
 
   &:hover {
@@ -45,7 +43,7 @@ export const CustomButton = styled.button`
     border: 1px solid #ac94f4;
   }
 
-    @media screen and (max-width: 820px) {
+  @media screen and (max-width: 820px) {
     font-size: 14px;
     padding: 1px 1px;
     border: 1px solid #ac94f4;
@@ -60,22 +58,4 @@ export const CustomButton = styled.button`
 
 // @media screen and (max-width: 480px) {
 //     font-size: 12px;
-//     width: 30px;
-//     height: 30px;
-//   }
-// `;
-
-export const ContactInfoContainer = styled.div`
-background-color: #010606; 
-color: #ac94f4;
-padding: 8px;
-border-radius: 5px;
-margin-top: 10px;
-border: 1px solid #ac94f4;
-
-&:hover {
-    background: #010606;
-    color: #ac94f4;
-    border: 1px solid #ac94f4;
-  }
-`;
+//     width: 30

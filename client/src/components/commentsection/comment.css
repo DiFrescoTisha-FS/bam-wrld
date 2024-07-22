@@ -1,0 +1,27 @@
+/* comment.css */
+.send-button {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background-color: #ac94f4;
+  color: #010606 !important;
+  border: 2px solid #ac94f4;
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.send-button:hover {
+  background-color: #010606;
+  color: #ac94f4 !important;
+}
+
+.send-button .icon {
+  color: #010606 !important;
+}
+
+.send-button:hover .icon {
+  color: #ac94f4 !important;
+}

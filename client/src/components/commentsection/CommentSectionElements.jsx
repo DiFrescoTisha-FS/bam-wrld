@@ -58,3 +58,31 @@ export const CommentSectionContainer = styled.div`
     padding-top: 200px;
   `}
 `;
+
+export const SendButton = styled.button`
+  display: inline-flex;
+  align-items: center;
+  border-radius: 9999px;
+  background-color: #ac94f4;
+  color: #010606; /* Text color */
+  padding: 0.5rem 1rem;
+  margin-bottom: 0.75rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #ac94f4; /* Adding border here for normal state */
+
+  .icon {
+    color: #010606; /* Icon color */
+  }
+
+  &:hover {
+    background-color: #010606;
+    color: #ac94f4; /* Text color on hover */
+    border: 2px solid #ac94f4; /* Adding border on hover */
+
+    .icon {
+      color: #ac94f4; /* Icon color on hover */
+    }
+  }
+`;
