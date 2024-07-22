@@ -71,9 +71,9 @@ const HeroSection = () => {
           $zIndex="3"
         />
       </SectionBg>
-      {/* <EarthCanvasContainer>
+      <EarthCanvasContainer>
         <EarthCanvas />
-      </EarthCanvasContainer> */}
+      </EarthCanvasContainer>
       <SharedSectionWrapper
         $customStyle={css`
           padding-top: 3rem;

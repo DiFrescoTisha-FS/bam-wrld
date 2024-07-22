@@ -24,7 +24,7 @@ const Home = () => {
 
   return (
     <>
-      {/* <TwinklingBackground /> */}
+      <TwinklingBackground />
       <Sidebar
         isOpen={state.isOpen}
         toggle={() => dispatch({ type: 'TOGGLE_SIDEBAR' })}
