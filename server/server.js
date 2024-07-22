@@ -1,34 +1,17 @@
-const express = require("express");
+// Ensure these are at the top of your server file
+const express = require('express');
+const connectDB = require("./api/database/database.js");
 const cloudinary = require("cloudinary").v2;
 const cors = require("cors");
 const morgan = require("morgan");
 const path = require("path");
-const { ClerkExpressWithAuth, ClerkExpressRequireAuth, requireAuth } = require('@clerk/clerk-sdk-node');
-const connectDB = require("./api/database/database.js");
-const authRoutes = require("./api/routes/authRoutes.js");
 const commentRatingRoutes = require("./api/routes/commentRatingRoutes.js");
+const userRoutes = require("./api/routes/userRoutes.js");
+const CommentRating = require('./api/models/commentRating.js');
 
-// Load environment variables from .env.development if not in production
-if (process.env.NODE_ENV !== 'production') {
-  require('dotenv').config();
-}
+require("dotenv").config();
 
 const app = express();
-
-console.log("Environment Variables:");
-console.log("PORT:", process.env.PORT);
-console.log("CLERK_SECRET_KEY:", process.env.CLERK_SECRET_KEY);
-console.log("CLERK_API_URL:", process.env.CLERK_API_URL);
-console.log("JWKS_URL:", process.env.JWKS_URL);
-console.log("MONGO_URI:", process.env.MONGO_URI);
-console.log("NODE_ENV:", process.env.NODE_ENV);
-console.log("FRONTEND_URL:", process.env.FRONTEND_URL);
-console.log("BACKEND_URL:", process.env.BACKEND_URL);
-console.log("CLOUDINARY_NAME:", process.env.CLOUDINARY_NAME);
-console.log("CLOUDINARY_KEY:", process.env.CLOUDINARY_KEY);
-console.log("CLOUDINARY_SECRET:", process.env.CLOUDINARY_SECRET);
-console.log("ALLOWED_ORIGINS:", process.env.ALLOWED_ORIGINS);
-console.log('VITE_CLERK_PUBLISHABLE_KEY:', process.env.VITE_CLERK_PUBLISHABLE_KEY);
 
 connectDB();
 
@@ -40,7 +23,7 @@ cloudinary.config({
 });
 
 const corsOptions = {
-  origin: process.env.ALLOWED_ORIGINS,
+  origin: process.env.ALLOWED_ORIGINS.split(','),
   credentials: true,
   methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
   allowedHeaders: "Content-Type,Authorization",
@@ -52,26 +35,32 @@ app.use(morgan("combined"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-app.use(
-  ClerkExpressWithAuth({
-    apiKey: process.env.CLERK_SECRET_KEY,
-    apiUrl: process.env.CLERK_API_URL,
-    jwtKey: process.env.JWKS_URL,
-  })
-);
+app.post('/api/comment-rating', async (req, res) => {
+  console.log('Received request at /api/comment-rating with data:', req.body);
+  const { userId, comment, rating } = req.body;
 
-// Use requireAuth for route protection if requireSession is not available
-app.get("/", requireAuth(), (req, res) => {
-  res.send("Hello, world!");
+  if (!userId || !comment || rating === undefined) {
+    console.error('Invalid request data:', req.body);
+    return res.status(400).json({ message: 'Invalid request data' });
+  }
+
+  try {
+    // Assuming you have a CommentRating model set up correctly
+    const commentRating = new CommentRating({
+      userId,
+      comment,
+      rating
+    });
+    await commentRating.save();
+    res.status(200).json({ message: 'Comment and rating submitted successfully' });
+  } catch (error) {
+    console.error('Error saving comment and rating:', error);
+    res.status(500).json({ message: 'Failed to submit comment and rating' });
+  }
 });
 
-// Routes
-app.use("/api", authRoutes);
 app.use("/api", commentRatingRoutes);
-
-app.get("/protected-endpoint", ClerkExpressRequireAuth(), (req, res) => {
-  res.json(req.auth);
-});
+app.use("/api", userRoutes);
 
 if (process.env.NODE_ENV === "production") {
   const buildPath = path.join(__dirname, "public", "dist");
@@ -90,7 +79,7 @@ if (process.env.NODE_ENV === "production") {
   });
 }
 
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 4001;
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });

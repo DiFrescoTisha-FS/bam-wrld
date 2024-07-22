@@ -1,29 +1,33 @@
-const express = require('express');
-const User = require('../models/user');
-const { ClerkExpressWithAuth } = require('@clerk/clerk-sdk-node');
-
+const express = require("express");
+const User = require("../models/user"); // Import your User model
 const router = express.Router();
 
-router.get('/users', ClerkExpressWithAuth(), async (req, res) => {
-  try {
-    const users = await User.find({});
-    res.json(users);
-  } catch (error) {
-    console.error("Error fetching users:", error);
-    res.status(500).json({ message: "Internal Server Error", error });
-  }
-});
+router.post("/save-user", async (req, res) => {
+  const { uid, displayName, email, photoURL } = req.body;
 
-router.get('/user/:id', ClerkExpressWithAuth(), async (req, res) => {
   try {
-    const user = await User.findById(req.params.id);
+    let user = await User.findOne({ uid });
+
     if (!user) {
-      return res.status(404).json({ message: "User not found" });
+      user = new User({
+        uid,
+        displayName,
+        email,
+        photoURL
+      });
+      await user.save();
+    } else {
+      // Update existing user if needed
+      user.displayName = displayName;
+      user.email = email;
+      user.photoURL = photoURL;
+      await user.save();
     }
-    res.json(user);
+
+    res.status(200).json({ message: "User saved successfully", user });
   } catch (error) {
-    console.error("Error fetching user by ID:", error);
-    res.status(500).json({ message: "Internal Server Error", error });
+    console.error("Error saving user:", error);
+    res.status(500).json({ message: "Internal server error" });
   }
 });
 

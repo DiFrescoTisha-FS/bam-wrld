@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link as RouterLink } from 'react-router-dom';
 
 export const FooterContainer = styled.footer`
   background-color: #010606;
@@ -10,7 +10,7 @@ export const FooterContainer = styled.footer`
   bottom: 0; /* Sticks to the bottom */
 `;
 
-export const FooterWrap =  styled.div`
+export const FooterWrap = styled.div`
     padding: 30px 0 24px 0;
     display: flex;
     flex-direction: column;
@@ -40,7 +40,7 @@ export const FooterLinksWrapper = styled.div`
     }
 `;
 
-export const FooterLinkItems =styled.div`
+export const FooterLinkItems = styled.div`
     display: flex;
     flex-direction: column;
     
@@ -65,7 +65,7 @@ export const FooterLinkTitle = styled.h1`
     color: #ac94f4;
 `;
 
-export const FooterLink = styled(Link)`
+export const FooterLink = styled(RouterLink)`
     color:#fff;
     text-decoration: none;
     margin-bottom: 1rem;
@@ -95,7 +95,7 @@ export const SocialMediaWrap = styled.div`
   }
 `;
 
-export const SocialMediaLogo = styled(Link)`
+export const SocialMediaLogo = styled(RouterLink)`
     justify-self: flex-start;
     cursor: pointer;
     font-size: 1.5rem;
@@ -144,4 +144,23 @@ export const SocialIcons = styled.div`
 export const SocialIconLink = styled.a`
     color: #fff;
     font-size: 24px;
+`;
+
+export const PrivacyTermsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 16px;
+  
+  a {
+    color: #fff;
+    text-decoration: none;
+    margin-bottom: 8px;
+    font-size: 14px;
+
+    &:hover {
+      color: #ac94f4;
+      transition: 0.3s ease-out;
+    }
+  }
 `;

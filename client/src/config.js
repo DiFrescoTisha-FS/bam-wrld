@@ -1,8 +1,5 @@
 // src/config.js
 export const logEnvVariables = () => {
-  console.log('VITE_CLERK_FRONTEND_API:', import.meta.env.VITE_CLERK_FRONTEND_API);
-  console.log('VITE_CLERK_PUBLISHABLE_KEY:', import.meta.env.VITE_CLERK_PUBLISHABLE_KEY);
-  console.log('VITE_CLERK_API_URL:', import.meta.env.VITE_CLERK_API_URL);
   console.log('VITE_BACKEND_URL:', import.meta.env.VITE_BACKEND_URL);
   console.log('VITE_CLOUDINARY_NAME:', import.meta.env.VITE_CLOUDINARY_NAME);
   console.log('VITE_PROXY_URL:', import.meta.env.VITE_PROXY_URL);

@@ -1,6 +1,10 @@
+// src/contexts/UserContext.jsx
+
 import React, { createContext, useReducer, useContext, useEffect } from "react";
-import { useUser, useSession } from "@clerk/clerk-react";
+import { auth } from "../firebase";
 import axios from 'axios';
+
+// Your existing context and state management code...
 
 const UserContext = createContext();
 
@@ -50,16 +54,18 @@ const userReducer = (state, action) => {
 
 export const UserProvider = ({ children }) => {
   const [state, dispatch] = useReducer(userReducer, initialState);
-  const { isLoaded, user } = useUser();
-  const { session } = useSession();
 
   useEffect(() => {
-    if (isLoaded && user) {
-      dispatch({ type: SET_CURRENT_USER, payload: user });
-    } else {
-      dispatch({ type: CLEAR_CURRENT_USER });
-    }
-  }, [isLoaded, user]);
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        dispatch({ type: SET_CURRENT_USER, payload: user });
+      } else {
+        dispatch({ type: SET_CURRENT_USER, payload: null });
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const setComment = (comment) => {
     dispatch({ type: SET_COMMENT, payload: comment });
@@ -87,29 +93,38 @@ export const UserProvider = ({ children }) => {
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
+    const { currentUser, comment, rating } = state;
+  
+    if (!currentUser) {
+      setErrorMessage("You must be logged in to submit a comment and rating.");
+      return;
+    }
+  
     try {
-      const token = await session.getToken();
-      console.log("Token obtained:", token);
+      const token = await auth.currentUser.getIdToken();
+      console.log('Submitting comment with data:', { userId: currentUser.uid, comment, rating });
+  
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/comment-rating`, {
-        comment: state.comment,
-        rating: state.rating,
+        userId: currentUser.uid,
+        comment,
+        rating
       }, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
         withCredentials: true,
       });
-
-      console.log(response);
-
+  
+      console.log('Response from server:', response.data);
+  
       dispatch({ type: SET_SUCCESS_MESSAGE, payload: 'Comment submitted successfully!' });
       dispatch({ type: SET_COMMENT, payload: '' });
       dispatch({ type: SET_RATING, payload: 0 });
     } catch (err) {
       setErrorMessage('Error submitting comment.');
-      console.error("Error submitting comment and rating:", err);
+      console.error("Error submitting comment and rating:", err.response?.data || err.message);
     }
-  };
+  };  
 
   const contextValue = {
     state,

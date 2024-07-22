@@ -139,11 +139,11 @@ const CommentSection = () => {
               )}
               <BtnWrap>
                 <button
-                  className="inline-flex items-center rounded-full bg-primary border border-[#010606] whitespace-nowrap px-10 py-4"
+                  className="inline-flex items-center rounded-full bg-[#ac94f4] border border-[#010606] whitespace-nowrap px-4 py-2 mb-3 text-black gap-2"
                   type="submit"
                 >
-                  <span>Send</span>
-                  <BsSendFill size={20} className="ml-2" />
+                  <BsSendFill size={20} className="text-black" />
+                  <span className="text-black">Send</span>
                 </button>
               </BtnWrap>
               {errorMessage && (

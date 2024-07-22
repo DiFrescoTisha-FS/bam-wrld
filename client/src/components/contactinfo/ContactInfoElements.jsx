@@ -37,7 +37,7 @@ export const ButtonBaseStyles = css`
 export const CustomButton = styled.button`
   ${ButtonBaseStyles}
   background-color: #ac94f4;
-  color: #010606;
+  color: black;
 
   &:hover {
     background-color: #010606;
@@ -53,22 +53,22 @@ export const CustomButton = styled.button`
   }
 `;
 
-export const Icon = styled.img`
-width: 40px;
-height: 40px;
-border-radius: 50%; 
+// export const Icon = styled.img`
+// width: 40px;
+// height: 40px;
+// border-radius: 50%; 
 
-@media screen and (max-width: 480px) {
-    font-size: 12px;
-    width: 30px;
-    height: 30px;
-  }
-`;
+// @media screen and (max-width: 480px) {
+//     font-size: 12px;
+//     width: 30px;
+//     height: 30px;
+//   }
+// `;
 
 export const ContactInfoContainer = styled.div`
 background-color: #010606; 
 color: #ac94f4;
-padding: 10px;
+padding: 8px;
 border-radius: 5px;
 margin-top: 10px;
 border: 1px solid #ac94f4;

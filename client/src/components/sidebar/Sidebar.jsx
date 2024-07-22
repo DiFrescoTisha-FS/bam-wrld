@@ -1,3 +1,5 @@
+// src/components/sidebar/Sidebar.js
+
 import React, { useEffect } from "react";
 import UserComponent from "../UserComponent";
 import { useUserContext } from "../../contexts/UserContext";

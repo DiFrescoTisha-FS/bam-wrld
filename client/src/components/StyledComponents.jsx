@@ -191,6 +191,7 @@ export const BamText = styled.div`
   ${media_queries.smallPhone`
     margin-top: 0;
     text-align: center;
+    margin-left: 125px;
   `}
 `;
 

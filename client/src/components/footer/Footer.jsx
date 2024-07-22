@@ -1,16 +1,10 @@
-import { useMemo } from 'react'
-import {
-  FaFacebook,
-  FaInstagram,
-  FaYoutube,
-  FaSoundcloud,
-} from "react-icons/fa";
+import React, { useMemo } from 'react';
+import { FaFacebook, FaInstagram, FaYoutube, FaSoundcloud } from "react-icons/fa";
 import { BsSnapchat, BsSpotify } from "react-icons/bs";
 import { MdEmail } from "react-icons/md";
 import { animateScroll as scroll } from "react-scroll/modules";
 import { IconContext } from "react-icons";
 import { generateImageUrl } from '../../utils/cloudinarySetup';
-
 import {
   FooterContainer,
   FooterWrap,
@@ -21,9 +15,11 @@ import {
   WebsiteRights,
   SocialIcons,
   SocialIconLink,
+  PrivacyTermsContainer
 } from "./FooterElements";
-import ContactInfo from "../contactinfo/ContactInfo"; 
-
+import ContactInfo from "../contactinfo/ContactInfo";
+import PrivacyLink from "../PrivacyLink";
+import TermsLink from "../TermsLink";
 
 const Footer = () => {
   const toggleHome = () => {
@@ -46,7 +42,6 @@ const Footer = () => {
         <FooterWrap>
           <SocialMedia id="social media">
             <SocialMediaWrap>
-              {/* Logo on the left */}
               <SocialMediaLogo to="/" onClick={toggleHome}>
                 <SocialMediaIcon src={logoUrl} alt="logo" />
               </SocialMediaLogo>
@@ -56,14 +51,6 @@ const Footer = () => {
                 Bamvsthewrld © {new Date().getFullYear()} All rights reserved
               </WebsiteRights>
               <SocialIcons>
-                <SocialIconLink
-                  href="//www.facebook.com/trapstarbam"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Facebook"
-                >
-                  <FaFacebook />
-                </SocialIconLink>
                 <SocialIconLink
                   href="//www.instagram.com/trapstar_bam"
                   target="_blank"
@@ -104,15 +91,11 @@ const Footer = () => {
                 >
                   <FaSoundcloud />
                 </SocialIconLink>
-                <SocialIconLink
-                  href="mailto:contact@trapstarbam.com"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label="Email"
-                >
-                  <MdEmail />
-                </SocialIconLink>
               </SocialIcons>
+              <PrivacyTermsContainer>
+                <PrivacyLink />
+                <TermsLink />
+              </PrivacyTermsContainer>
             </SocialMediaWrap>
           </SocialMedia>
         </FooterWrap>
