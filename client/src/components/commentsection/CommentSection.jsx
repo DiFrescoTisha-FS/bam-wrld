@@ -139,11 +139,11 @@ const CommentSection = () => {
               )}
               <BtnWrap>
                 <button
-                  className="inline-flex items-center rounded-full bg-[#ac94f4] border border-[#010606] whitespace-nowrap px-4 py-2 mb-3 text-black gap-2"
+                  className="inline-flex items-center rounded-full bg-[#ac94f4] border border-[#010606] whitespace-nowrap px-4 py-2 mb-3 text-black gap-2 hover:bg-[#010606] hover:text-[#ac94f4]"
                   type="submit"
                 >
-                  <BsSendFill size={20} className="text-black" />
-                  <span className="text-black">Send</span>
+                  <BsSendFill size={20} className="text-black hover:text-[#ac94f4]" />
+                  <span className="text-black hover:text-[#ac94f4]">Send</span>
                 </button>
               </BtnWrap>
               {errorMessage && (
