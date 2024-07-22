@@ -17,11 +17,11 @@ import {
   Topline,
   Heading,
 } from "../StyledComponents.jsx";
-import { CommentImgWrap } from "./CommentSectionElements.jsx";
+import { CommentImgWrap, SendButton } from "./CommentSectionElements.jsx";
 import "./comment.css"; // Import the CSS file
 
 const CommentSection = () => {
-  const { state, setComment, setRating, handleCommentSubmit, setErrorMessage } = useUserContext();
+  const { state, setComment, setRating, handleCommentSubmit, setErrorMessage, setSuccessMessage } = useUserContext();
   const { currentUser, comment, rating, errorMessage, successMessage } = state;
   const [showLoginMessage, setShowLoginMessage] = useState(false);
 
@@ -50,20 +50,16 @@ const CommentSection = () => {
   }, [cloudinaryInstance]);
 
   const handleRatingChange = (newRating) => {
-    console.log('Rating changed:', newRating);
     setRating(Number(newRating)); // Ensure the rating is a number
   };
 
   const handleCommentChange = (event) => {
-    console.log('Comment changed:', event.target.value);
     setComment(event.target.value);
   };
 
   const handleSubmit = async (event) => {
-    console.log('Submitting comment/rating...');
     event.preventDefault();
     if (!currentUser) {
-      console.log('User not logged in');
       setErrorMessage("Login required to leave a comment or rate. Please log in to continue.");
       setShowLoginMessage(true);
       setTimeout(() => setShowLoginMessage(false), 3000); // Hide message after 3 seconds
@@ -73,14 +69,27 @@ const CommentSection = () => {
   };
 
   useEffect(() => {
+    if (showLoginMessage) {
+      const timer = setTimeout(() => {
+        setShowLoginMessage(false);
+      }, 3000); // Hide message after 3 seconds
+
+      return () => clearTimeout(timer);
+    }
+  }, [showLoginMessage]);
+
+  useEffect(() => {
     const timer = setTimeout(() => {
-      if (errorMessage || successMessage) {
+      if (errorMessage) {
         setErrorMessage("");
+      }
+      if (successMessage) {
+        setSuccessMessage(""); // Clear success message as well
       }
     }, 3000);
 
     return () => clearTimeout(timer);
-  }, [errorMessage, successMessage, setErrorMessage]);
+  }, [errorMessage, successMessage, setErrorMessage, setSuccessMessage]);
 
   return (
     <SectionContainer id="comments">
@@ -149,10 +158,10 @@ const CommentSection = () => {
                 </div>
               )}
               <BtnWrap>
-                <button className="send-button" type="submit">
+                <SendButton type="submit">
                   <BsSendFill size={20} className="icon" />
                   <span className="text-[#010606] hover:text-[#ac94f4]">Send</span>
-                </button>
+                </SendButton>
               </BtnWrap>
               {errorMessage && (
                 <div style={{ color: "red", marginTop: "10px" }}>{errorMessage}</div>

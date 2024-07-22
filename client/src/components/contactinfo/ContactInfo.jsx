@@ -6,9 +6,6 @@ import {
   ContactInfoContainer
 } from "./ContactInfoElements";
 
-console.log('CustomButton:', CustomButton);
-console.log('ContactInfoContainer:', ContactInfoContainer);
-
 const ContactInfo = () => {
   const { state } = useUserContext();
   const { currentUser } = state;
@@ -49,7 +46,7 @@ const ContactInfo = () => {
   return (
     <div>
       <CustomButton className="bg-[#ac94f4] text-black" onClick={handleContactInfoToggle}>
-        {showContactInfo ? 'Hide Contact Info' : 'Contact Info'}
+        {showContactInfo ? 'Hide Contact Info' : 'Contact Info'} <BiSolidContact />
       </CustomButton>
       {showContactInfo && currentUser && (
         <ContactInfoContainer>

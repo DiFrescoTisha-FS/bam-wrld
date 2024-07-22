@@ -1,3 +1,4 @@
+// src/components/contactinfo/ContactInfoElements.jsx
 import styled, { css } from 'styled-components';
 
 export const ButtonBaseStyles = css`
@@ -51,11 +52,17 @@ export const CustomButton = styled.button`
   }
 `;
 
-// export const Icon = styled.img`
-// width: 40px;
-// height: 40px;
-// border-radius: 50%; 
+export const ContactInfoContainer = styled.div`
+  background-color: #010606;
+  color: #ac94f4;
+  padding: 8px;
+  border-radius: 5px;
+  margin-top: 10px;
+  border: 1px solid #ac94f4;
 
-// @media screen and (max-width: 480px) {
-//     font-size: 12px;
-//     width: 30
+  &:hover {
+    background: #010606;
+    color: #ac94f4;
+    border: 1px solid #ac94f4;
+  }
+`;

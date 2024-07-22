@@ -9,7 +9,9 @@ const commentRatingRoutes = require("./api/routes/commentRatingRoutes.js");
 const userRoutes = require("./api/routes/userRoutes.js");
 const CommentRating = require('./api/models/commentRating.js');
 
-require("dotenv").config();
+if (process.env.NODE_ENV !== "production") {
+  require("dotenv").config({ path: path.join(__dirname, ".env.development") });
+}
 
 const app = express();
 

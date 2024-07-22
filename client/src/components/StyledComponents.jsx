@@ -425,6 +425,11 @@ margin-top: 15px;
   border-radius: 5px;
   margin-bottom: 10px;
   resize: vertical;
+  outline: none;
+
+  &:focus {
+    border-color: #ac94f4; /* Optional: Change border color on focus */
+  }
 
   ${media_queries.tablet`
     width: 62%;
