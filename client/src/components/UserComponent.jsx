@@ -2,7 +2,7 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { useUserContext } from '../contexts/UserContext';
-import { auth } from "../firebase";
+import { auth } from "../firebase"; // Ensure this is correctly imported
 import { signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FaChevronDown } from 'react-icons/fa';
 import { IoMdLogOut } from 'react-icons/io';
@@ -35,10 +35,12 @@ const UserComponent = () => {
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
+      console.log('Initiating Google Sign-In');
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
+      console.log('Google Sign-In successful', user);
       dispatch({ type: "SET_CURRENT_USER", payload: user });
-  
+
       // Send user info to the backend
       await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/save-user`, {
         uid: user.uid,
