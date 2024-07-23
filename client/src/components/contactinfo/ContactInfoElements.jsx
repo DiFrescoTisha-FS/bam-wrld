@@ -1,4 +1,3 @@
-// src/components/contactinfo/ContactInfoElements.jsx
 import styled, { css } from 'styled-components';
 
 export const ButtonBaseStyles = css`
@@ -19,6 +18,10 @@ export const ButtonBaseStyles = css`
   &:hover {
     background: #010606;
     color: #ac94f4;
+
+    svg {
+      color: #ac94f4; /* Change icon color on hover */
+    }
   }
 
   @media screen and (max-width: 768px) {

@@ -46,7 +46,7 @@ const ContactInfo = () => {
   return (
     <div>
       <CustomButton className="bg-[#ac94f4] text-black" onClick={handleContactInfoToggle}>
-        {showContactInfo ? 'Hide Contact Info' : 'Contact Info'} <BiSolidContact />
+        {showContactInfo ? 'Hide Contact Info' : 'Contact Info'}
       </CustomButton>
       {showContactInfo && currentUser && (
         <ContactInfoContainer>

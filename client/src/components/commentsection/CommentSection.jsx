@@ -59,6 +59,9 @@ const CommentSection = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setErrorMessage(""); // Clear previous messages
+    setSuccessMessage(""); // Clear previous messages
+
     if (!currentUser) {
       setErrorMessage("Login required to leave a comment or rate. Please log in to continue.");
       setShowLoginMessage(true);
