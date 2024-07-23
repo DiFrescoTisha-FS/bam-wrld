@@ -2,19 +2,19 @@ import React, { useMemo, useState, useEffect } from "react";
 import {
   SectionBg,
   SectionWrapper,
-  BtnWrap,
   ButtonIcon,
   StyledText,
   StyledImage,
-  Topline,
-  Heading,
+
 } from "../StyledComponents";
 import {
   ArtistImgWrap,
   SectionContainer,
   FlexibleLayout,
   TextWrapper,
-
+  Topline,
+  Heading,
+  BtnWrap,
   Button,
 
 } from "./ArtistElements";

@@ -179,7 +179,7 @@ export const BamText = styled.div`
 
   ${media_queries.tablet`
     margin-top: 0;
-    margin-right: 260px;
+    // margin-right: 100px;
     text-align: center;
   `}
 
@@ -191,7 +191,7 @@ export const BamText = styled.div`
   ${media_queries.smallPhone`
     margin-top: 0;
     text-align: center;
-    margin-left: 125px;
+    // margin-left: 100px;
   `}
 `;
 
@@ -203,7 +203,7 @@ export const TextWrapper = styled.div`
   ${media_queries.tablet`
     max-width: 100%;
     order: 2; // Text on bottom
-    margin-left: 40%;
+    // margin-left: 40%;
   `}
 
   ${media_queries.phone`
@@ -244,6 +244,7 @@ export const StyledText = styled.p.attrs(({ as = 'p' }) => ({
   margin-top: ${({ $marginTop }) => $marginTop || '0'};
   margin-bottom: ${({ $marginBottom }) => $marginBottom || '0'};
   margin-right: ${({ $marginRight }) => $marginRight || '0'};
+  margin-left: ${({ $marginLeft }) => $marginLeft || '0'};
   text-align: ${({ $textAlign }) => $textAlign || 'left'};
   position: ${({ $position }) => $position || 'relative'};
   max-width: ${({ $maxWidth }) => $maxWidth || 'none'};
@@ -252,16 +253,19 @@ export const StyledText = styled.p.attrs(({ as = 'p' }) => ({
     font-size: ${({ $tabletFontSize, $fontSize }) => $tabletFontSize || $fontSize};
     text-align: ${({ $tabletTextAlign }) => $tabletTextAlign || 'center'};
     margin-right: ${({ $tabletMarginRight }) => $tabletMarginRight || '0'};
+    margin-left: ${({ $tabletMarginLeft }) => $tabletMarginLeft || '0'};
   `}
 
   ${media_queries.phone`
     font-size: ${({ $phoneFontSize, $fontSize }) => $phoneFontSize || $fontSize};
     text-align: center;
+    margin-left: ${({ $phoneMarginLeft }) => $phoneMarginLeft || '0'};
   `}
 
   ${media_queries.smallPhone`
     font-size: ${({ $smallPhoneFontSize, $fontSize }) => $smallPhoneFontSize || $fontSize};
     text-align: center;
+    margin-left: ${({ $smallPhoneMarginLeft }) => $smallPhoneMarginLeft || '0'};
   `}
 `;
 
@@ -274,7 +278,7 @@ export const Heading = styled.h1`
   ${media_queries.tablet`
     font-size: 40px;
     text-align: center;
-    // margin-right: 250px;
+    margin-left: 25px;
   `}
 
   ${media_queries.phone`
@@ -433,10 +437,12 @@ margin-top: 15px;
 
   ${media_queries.tablet`
     width: 62%;
+    margin-left: 150px;
   `}
 
 ${media_queries.phone`
     width: 100%;
+    margin-left: 0;
   `}  
 `;
 

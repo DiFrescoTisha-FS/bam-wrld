@@ -17,7 +17,7 @@ import {
   Topline,
   Heading,
 } from "../StyledComponents.jsx";
-import { CommentImgWrap, SendButton } from "./CommentSectionElements.jsx";
+import { CommentImgWrap, SendButton, RatingContainer } from "./CommentSectionElements.jsx";
 import "./comment.css"; // Import the CSS file
 
 const CommentSection = () => {
@@ -136,17 +136,20 @@ const CommentSection = () => {
               $marginBottom="25px"
               $maxWidth="440px"
               $phoneFontSize="18px"
+              $tabletMarginLeft="150px"
             >
               Tell Bam what you loved most about your galaxy tour and rate your
               adventure!” Thanks for stopping by.
             </StyledText>
             <FormWrap onSubmit={handleSubmit}>
+              <RatingContainer>
               <Rating
                 value={Number(rating)} // Ensure rating is a number
                 onChange={handleRatingChange}
                 size={24}
                 activeColor="#ffd700"
-              />
+                />
+              </RatingContainer>
               <TextArea
                 placeholder="Leave a comment"
                 value={comment}

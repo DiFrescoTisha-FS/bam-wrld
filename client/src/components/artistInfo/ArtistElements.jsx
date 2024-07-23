@@ -118,8 +118,6 @@ export const TextWrapper = styled.div`
   `}
 `;
 
-
-
 export const Button = styled(Link)`
     border-radius: 50px;
     background: #ac94f4;
@@ -143,4 +141,70 @@ export const Button = styled(Link)`
         outline: 1px solid #ac94f4;
         border: 1px solid #ac94f4;
     }
+`;
+
+export const BtnWrap = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  text-decoration: none;
+
+  ${media_queries.tablet`
+    font-weight: 500;
+    justify-content: center;
+    margin-right: 260px;
+  `}
+
+  ${media_queries.phone`
+    font-weight: 300;
+    justify-content: center;
+    margin-right: 0;
+  `}
+`;
+
+export const Heading = styled.h1`
+  color: #ac94f4;
+  font-size: 44px;
+  font-weight: 600;
+  text-align: left;
+
+  ${media_queries.tablet`
+    font-size: 40px;
+    text-align: center;
+    margin-right: 250px;
+  `}
+
+  ${media_queries.phone`
+    font-size: 32px;
+    text-align: center;
+    margin-right: 0;
+  `}
+`;
+
+export const Topline = styled.div`
+  font-size: 20px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: 16px;
+  letter-spacing: 1.4px;
+  text-align: left;
+
+  ${media_queries.tablet`
+    margin-top: 10px;
+    margin-right: 250px;
+    text-align: center;
+  `}
+
+  ${media_queries.phone`
+    margin-top: 0;
+    margin-right: 0;
+    text-align: center;
+  `}
+
+  ${media_queries.smallPhone`
+    margin-top: 0;
+    text-align: center;
+    margin-right: 0;
+    margin: 0 auto;
+  `}
 `;

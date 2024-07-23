@@ -83,7 +83,7 @@ const MusicSection = memo(() => {
             </Music>
           </ImgWrap>
           <TextWrapper>
-              <Topline className="text-center">
+              <Topline className="text-center ml-3">
                 Bam Beats
               </Topline>
               <Heading className="text-center">
@@ -97,6 +97,7 @@ const MusicSection = memo(() => {
               $marginBottom="25px"
               $maxWidth="440px"
               $phoneFontSize="18px"
+              $tabletMarginLeft="150px"
             >
               SoundCloud is the number one platform used by Bam fans. You can
               stay up to date with the latest events and music media produced

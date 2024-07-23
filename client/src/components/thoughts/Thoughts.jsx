@@ -236,6 +236,7 @@ const Thoughts = () => {
               $marginBottom="25px"
               $maxWidth="440px"
               $phoneFontSize="18px"
+              $tabletMarginLeft="150px"
             >
               'Music is a way for me to escape reality. It exposes my flaws, and
               pushes me to be a better person. Always believe in yourself, even

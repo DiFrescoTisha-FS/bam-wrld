@@ -86,3 +86,16 @@ export const SendButton = styled.button`
     }
   }
 `;
+
+export const RatingContainer = styled.div`
+
+// Adjust this value as needed
+
+  ${media_queries.tablet`
+    margin-left: 150px; 
+  `}
+
+${media_queries.phone`
+    margin-left: 0; 
+  `}
+`;
