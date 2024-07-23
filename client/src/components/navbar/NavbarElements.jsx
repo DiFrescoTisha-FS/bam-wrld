@@ -101,13 +101,22 @@ export const NavMenu = styled.ul`
   align-items: center;
   list-style: none;
   text-align: center;
-  margin: 0;
+  margin-right: 20px;
+  margin-left: 20px;
   padding: 0;
 
   ${media_queries.tablet`
       display: none;
+      margin: 0;
+  `}
+
+${media_queries.phone`
+      display: none;
+      margin: 0;
   `}
 `;
+
+
 
 export const NavItem = styled.li`
     height: 80px;

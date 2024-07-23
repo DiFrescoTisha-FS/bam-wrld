@@ -7,6 +7,8 @@ import UserComponent from "../UserComponent";
 import { FaBars } from "react-icons/fa";
 import { IconContext } from "react-icons/lib";
 import { animateScroll as scroll } from "react-scroll";
+import { motion } from "framer-motion";
+import debounce from 'lodash/debounce';
 import {
   NavWrapper,
   NavbarContainer,
@@ -17,7 +19,6 @@ import {
   NavLinks,
   NavBtn,
 } from "./NavbarElements";
-import debounce from 'lodash/debounce';
 
 const Navbar = React.memo(({ toggle }) => {
   const { state, dispatch } = useUserContext();
@@ -59,18 +60,29 @@ const Navbar = React.memo(({ toggle }) => {
       <NavWrapper scrollNav={scrollNav}>
         <NavbarContainer>
           <NavLogo to="/" onClick={() => scroll.scrollToTop()}>
-            <NavIcon src={logoUrl} alt="logo" loading="lazy" />
+            <motion.div 
+              initial={{ x: -500, opacity: 0, scale: 0.5 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5 }}
+            >
+              <NavIcon src={logoUrl} alt="logo" loading="lazy" />
+            </motion.div>
           </NavLogo>
           <MobileIcon $isOpen={state.isOpen} onClick={toggle}>
             <FaBars />
           </MobileIcon>
           <NavMenu>
             {["home", "bio", "music", "new", "thoughts", "comments"].map((item, index) => (
-              <li key={index}>
+              <motion.li 
+                key={index}
+                initial={{ x: 500, opacity: 0, scale: 0.5 }}
+                animate={{ x: 0, opacity: 1, scale: 1 }}
+                transition={{ duration: 1.5 }}
+              >
                 <NavLinks
                   to={item}
                   smooth={true}
-                  $duration={500}
+                  duration={500}
                   spy={true}
                   exact="true"
                   offset={-80}
@@ -78,11 +90,17 @@ const Navbar = React.memo(({ toggle }) => {
                 >
                   {item.charAt(0).toUpperCase() + item.slice(1)}
                 </NavLinks>
-              </li>
+              </motion.li>
             ))}
           </NavMenu>
           <NavBtn>
-            <UserComponent isMobile={isMobile} toggle={toggle} dispatch={dispatch} />
+            <motion.div 
+              initial={{ x: 500, opacity: 0, scale: 0.5 }}
+              animate={{ x: 0, opacity: 1, scale: 1 }}
+              transition={{ duration: 1.5 }}
+            >
+              <UserComponent isMobile={isMobile} toggle={toggle} dispatch={dispatch} />
+            </motion.div>
           </NavBtn>
         </NavbarContainer>
       </NavWrapper>

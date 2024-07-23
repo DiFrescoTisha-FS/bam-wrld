@@ -7,6 +7,8 @@ import { signOut, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { FaChevronDown } from 'react-icons/fa';
 import { IoMdLogOut } from 'react-icons/io';
 import axios from 'axios';
+import { SignInButton } from './StyledComponents';
+import { FcGoogle } from "react-icons/fc";
 
 const UserComponent = () => {
   const { state, dispatch } = useUserContext();
@@ -80,12 +82,10 @@ const UserComponent = () => {
           )}
         </div>
       ) : (
-        <button
-          className="flex items-center justify-center gap-2 px-4 py-2 rounded-full bg-[#010606] text-[#ac94f4] border-2 border-[#ac94f4] text-md shadow-md cursor-pointer transition-colors hover:opacity-60"
-          onClick={handleGoogleSignIn}
-        >
-          <span>Sign in with Google</span>
-        </button>
+          <SignInButton onClick={handleGoogleSignIn}>
+          <FcGoogle size={20} className="mr-2" />
+          <span>Sign In</span>
+        </SignInButton>
       )}
     </div>
   );

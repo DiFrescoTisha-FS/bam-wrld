@@ -595,3 +595,28 @@ export const ResponsiveImage = styled.img`
     background-image: url(${({$smallMobileUrl}) => $smallMobileUrl});
   `}
 `;
+
+export const SignInButton = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2;
+  padding: 0.5rem 1rem;
+  border-radius: 9999px;
+  text-decoration: none;
+  border: 2px solid #ac94f4;
+  color: #ac94f4;
+  background: transparent; // Remove background color
+  box-shadow: 0 0 10px #ac94f4; // Add glow effect
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  
+  &:hover {
+    opacity: 0.6; // Transition effect for hover state
+  }
+  
+  &:focus {
+    outline: none; // Remove focus ring
+    box-shadow: 0 0 20px #ac94f4; // Stronger glow on focus
+  }
+`;
