@@ -71,7 +71,7 @@ const UserComponent = () => {
           <FaChevronDown className="ml-2" />
           {dropdownOpen && (
             <div ref={dropdownRef} className="dropdown">
-              <button
+            <button
                 className="flex items-center w-full px-4 py-2 text-sm text-black hover:bg-gray-200"
                 onClick={handleSignOut}
               >
@@ -82,7 +82,7 @@ const UserComponent = () => {
           )}
         </div>
       ) : (
-          <SignInButton onClick={handleGoogleSignIn}>
+          <SignInButton className="mt-4" onClick={handleGoogleSignIn}>
           <FcGoogle size={20} className="mr-2" />
           <span>Sign In</span>
         </SignInButton>

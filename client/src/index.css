@@ -179,7 +179,7 @@ button span {
 .signed-in-user span {
   color: #ac94f4;
   margin-bottom: 2px;
-  font-size: 1.2em; /* Adjust font size as needed */
+  font-size: .75em; /* Adjust font size as needed */
   font-weight: 400; /* Semi-bold */
 }
 
@@ -206,6 +206,7 @@ button span {
   border: none; /* Remove border */
   border-radius: 50px; /* Match the button border radius */
   color: #ac94f4; /* Ensure the color matches the theme */
+  box-shadow: 0 0 20px #ac94f4;
   cursor: pointer;
   transition: opacity 0.3s ease;
   width: 100%; /* Make sure the button takes full width of the dropdown */
