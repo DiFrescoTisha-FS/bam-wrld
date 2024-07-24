@@ -12,9 +12,9 @@ const moveTwinkBack = keyframes`
 `;
 
 const twinkle = keyframes`
-  0% { opacity: 0.8; }
+  0% { opacity: 0.6; }
   50% { opacity: 1; }
-  100% { opacity: 0.8; }
+  100% { opacity: 0.6; }
 `;
 
 const meteorAnimation = keyframes`
@@ -57,7 +57,7 @@ const Stars = styled.div`
   height: 100%;
   display: block;
   z-index: 0;
-  opacity: 0.9;
+  opacity: 0.8;
   animation: ${twinkle} 2s infinite ease-in-out;
 `;
 
@@ -89,7 +89,7 @@ const Meteor = styled.div`
   width: 300px;
   height: 1px;
   transform: rotate(-45deg);
-  background-image: linear-gradient(to right, #ac94f4, rgba(255, 255, 255, 0));
+  background-image: linear-gradient(to right, #ac94f4, rgba(172, 148, 244, 0));
   animation: ${meteorAnimation} ${({ $duration }) => $duration}s linear infinite;
   z-index: 4;
 
@@ -100,8 +100,8 @@ const Meteor = styled.div`
     height: 5px;
     border-radius: 50%;
     margin-top: -2px;
-    background: rgba(172, 148, 244, 0.7);
-    box-shadow: 0 0 15px 3px #ac94f4;
+    background: rgba(172, 148, 244, 1);
+    box-shadow: 0 0 15px 5px rgba(172, 148, 244, 1);
   }
 `;
 
@@ -154,7 +154,7 @@ const TwinklingBackground = () => {
     });
   }, [cloudinaryInstance]);
 
-  const starBoxShadow = generateStars(500);
+  const starBoxShadow = generateStars(1000); // Increase the number of stars
   const meteors = createMeteors(20);
 
   return (

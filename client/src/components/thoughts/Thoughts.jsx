@@ -221,7 +221,6 @@ const Thoughts = () => {
               $fontWeight="600"
               $color="#ac94f4"
               $marginBottom="10px"
-              $marginLeft="100px"
               $hideOnSmallScreens={true}
             >
               Click on a planet!
