@@ -4,7 +4,4 @@ config.env
 ecosystem.config.js
 .env.development
 .env.backup
-<<<<<<< HEAD
-
-=======
->>>>>>> main
+/server/config/firebase-adminsdk.json
