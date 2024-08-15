@@ -1,11 +1,4 @@
-
-
-
-<!-- <p align="center">
-   <img src="../images/sig.png" alt="Bam Signature">
-   <img src="../images/logo100.png" alt="Bam Logo" width="200px" height="200px">
-</p> -->
-
+![bamvsthewrld](https://github.com/user-attachments/assets/08067b82-0f78-48f2-ae02-e40144366cc9)
 
 
 ## Table of Contents
