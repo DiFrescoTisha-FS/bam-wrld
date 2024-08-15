@@ -26,7 +26,7 @@
 Embark on a journey through the electrifying world of a rising star. This website is more than just a showcase; it's a vibrant platform designed to connect fans with Gavin Di Fresco, artistically known as Bamvsthewrld. Here, Bamvsthewrld unveils his talents across a spectrum of engaging media, inviting you into his universe of sound and vision. Packed with dynamic content and direct avenues for fan interaction, this site is your exclusive pass to get closer to an artist poised for greatness. Get ready to be part of Bamvsthewrld’s journey – where passion meets rhythm and dreams take flight!
 
 ## Tech Stack
-* #### Vite/React.js
+* #### React.js
 * #### MongoDB
 * #### ThreeJS
 * #### Firebase
@@ -159,7 +159,7 @@ In the frontend terminal, start the React application:
 ```
 npm start
 ```
-In your default web browser, visit http://localhost:5173 where you can view the application.
+In your default web browser, visit http://localhost:3000 where you can view the application.
 
 By following these steps, you will have the full application running on your local machine.
 
@@ -168,10 +168,9 @@ By following these steps, you will have the full application running on your loc
 
 | Route                | Description                                                      |
 |----------------------|------------------------------------------------------------------|
-| http://localhost:5173 | Link to Vite React.js base URL that Bamvsthewrld application runs on.       |
+| http://localhost:3000 | Link to React.js base URL that Bamvsthewrld application runs on.       |
 | /auth/google     | Sign in to Google for authorization.                             |
 | /api/comment-rating               | Leave a comment and rating                                                |
-| /api/user/agree              | Read user terms and conditions                          |
 
 ## Project Status
 Project is: _complete_
