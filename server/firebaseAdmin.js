@@ -1,24 +1,38 @@
 // server/firebaseAdmin.js
 const admin = require("firebase-admin");
+const fs = require("fs");
+const path = require("path");
 
-let serviceAccount;
-
-// Prefer env var (Heroku / production)
-if (process.env.FIREBASE_SERVICE_ACCOUNT_B64) {
-  const buff = Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_B64, "base64");
-  serviceAccount = JSON.parse(buff.toString("utf-8"));
-} else {
-  // Local dev fallback (make sure this file is in .gitignore)
-  serviceAccount = require("./config/firebase-adminsdk.json");
+function loadRawCred() {
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
+    return process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
+  }
+  if (process.env.FIREBASE_SERVICE_ACCOUNT_B64) {
+    return Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_B64, "base64").toString("utf8");
+  }
+  // local fallback file
+  return fs.readFileSync(path.join(__dirname, "config", "firebase-adminsdk.json"), "utf8");
 }
+
+const raw = loadRawCred();
+const svc = JSON.parse(raw);
+
+// 🔧 normalize private key: handle \n vs real newlines and trim stray quotes
+const privateKey = (svc.private_key || "")
+  .replace(/\\n/g, "\n")       // turn literal \n into real newlines
+  .replace(/\r\n/g, "\n")      // normalize CRLF
+  .trim();
 
 if (!admin.apps.length) {
   admin.initializeApp({
-    credential: admin.credential.cert(serviceAccount),
-    // If you use Realtime Database, keep this and ensure project_id is correct:
-    // databaseURL: `https://${serviceAccount.project_id}.firebaseio.com`,
+    credential: admin.credential.cert({
+      projectId: svc.project_id,
+      clientEmail: svc.client_email,
+      privateKey,               // use normalized key
+    }),
+    // If you use Realtime DB, uncomment:
+    // databaseURL: `https://${svc.project_id}.firebaseio.com`,
   });
 }
 
-const auth = admin.auth();
-module.exports = { auth };
+module.exports = { auth: admin.auth() };
