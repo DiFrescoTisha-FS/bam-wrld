@@ -1,1 +1,0 @@
-import{j as e}from"./index-Bfm6BA1g.js";const s=()=>e.jsxs("div",{children:[e.jsx("h1",{children:"This is a protected page"}),e.jsx("p",{children:"Only visible to authenticated users."})]});export{s as default};

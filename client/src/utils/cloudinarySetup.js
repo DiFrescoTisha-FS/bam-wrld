@@ -6,7 +6,7 @@ import { fill } from '@cloudinary/url-gen/actions/resize';
 // Initialize Cloudinary instance
 const cloudinaryInstance = new Cloudinary({
   cloud: {
-    cloudName: import.meta.env.VITE_CLOUDINARY_NAME, // Ensure this environment variable is set
+    cloudName: import.meta.env.VITE_CLOUDINARY_CLOUD_NAME, // Ensure this environment variable is set
   },
 });
 
