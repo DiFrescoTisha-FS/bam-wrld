@@ -1,38 +1,34 @@
 // server/firebaseAdmin.js
 const admin = require("firebase-admin");
 
-function loadServiceAccount() {
+function loadSvc() {
   const b64 = process.env.FIREBASE_SERVICE_ACCOUNT_B64 || "";
-  const jsonRaw = process.env.FIREBASE_SERVICE_ACCOUNT_JSON || "";
-
-  if (b64) {
-    // decode base64 -> JSON string -> object
-    const jsonStr = Buffer.from(b64, "base64").toString("utf8");
-    return JSON.parse(jsonStr);
-  }
-  if (jsonRaw) {
-    // allow raw JSON as a fallback
-    return JSON.parse(jsonRaw);
-  }
+  const raw = process.env.FIREBASE_SERVICE_ACCOUNT_JSON || "";
+  if (b64) return JSON.parse(Buffer.from(b64, "base64").toString("utf8"));
+  if (raw) return JSON.parse(raw);
   throw new Error("No Firebase service account found in env vars.");
 }
 
-const svc = loadServiceAccount();
+const svc = loadSvc();
 
-// Normalize the private key in a way that handles all cases:
-//  - JSON with literal \n → becomes real newlines
-//  - Windows CRLF → LF
-//  - Accidental surrounding quotes → stripped
+// Normalize + sanitize key
 let privateKey = String(svc.private_key || "")
+  // handle escaped \n inside JSON
   .replace(/\\n/g, "\n")
+  // normalize CRLF → LF
   .replace(/\r\n/g, "\n")
-  .replace(/^\s*"+|"+\s*$/g, "") // strip accidental wrapping quotes
-  .trim();
+  // strip accidental wrapping quotes
+  .replace(/^\s*"+|"+\s*$/g, "")
+  // strip any non-printable chars that can sneak in
+  .replace(/[^\x09\x0A\x0D\x20-\x7E]/g, "")
+  // ensure exactly one trailing newline (PEM parsers are picky sometimes)
+  .replace(/\n*$/g, "\n")
+  .trimEnd() + "\n";
 
-// Minimal diagnostics (safe): lengths + begin/end checks, not the key itself
-if (process.env.NODE_ENV !== "production" || process.env.DEBUG_FIREBASE) {
+// Safe diagnostics (no secrets):
+if (process.env.DEBUG_FIREBASE) {
   const starts = privateKey.startsWith("-----BEGIN PRIVATE KEY-----");
-  const ends = privateKey.endsWith("-----END PRIVATE KEY-----") || privateKey.endsWith("-----END PRIVATE KEY-----\n");
+  const ends = privateKey.endsWith("-----END PRIVATE KEY-----\n");
   console.log("[firebaseAdmin] keyLen:", privateKey.length, "starts:", starts, "ends:", ends);
 }
 
@@ -43,8 +39,6 @@ if (!admin.apps.length) {
       clientEmail: svc.client_email,
       privateKey,
     }),
-    // databaseURL: `https://${svc.project_id}.firebaseio.com`,
-    // storageBucket: `${svc.project_id}.appspot.com`,
   });
 }
 
