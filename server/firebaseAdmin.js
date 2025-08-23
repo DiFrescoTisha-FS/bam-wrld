@@ -1,26 +1,14 @@
-// server/firebaseAdmin.js
 const admin = require("firebase-admin");
-const fs = require("fs");
-const path = require("path");
 
-function loadRawCred() {
-  if (process.env.FIREBASE_SERVICE_ACCOUNT_JSON) {
-    return process.env.FIREBASE_SERVICE_ACCOUNT_JSON;
-  }
-  if (process.env.FIREBASE_SERVICE_ACCOUNT_B64) {
-    return Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_B64, "base64").toString("utf8");
-  }
-  // local fallback file
-  return fs.readFileSync(path.join(__dirname, "config", "firebase-adminsdk.json"), "utf8");
-}
+// Decode from base64 env var into JSON
+const svc = JSON.parse(
+  Buffer.from(process.env.FIREBASE_SERVICE_ACCOUNT_B64 || "", "base64").toString("utf8")
+);
 
-const raw = loadRawCred();
-const svc = JSON.parse(raw);
-
-// 🔧 normalize private key: handle \n vs real newlines and trim stray quotes
+// Normalize private key newlines
 const privateKey = (svc.private_key || "")
-  .replace(/\\n/g, "\n")       // turn literal \n into real newlines
-  .replace(/\r\n/g, "\n")      // normalize CRLF
+  .replace(/\\n/g, "\n")
+  .replace(/\r\n/g, "\n")
   .trim();
 
 if (!admin.apps.length) {
@@ -28,10 +16,11 @@ if (!admin.apps.length) {
     credential: admin.credential.cert({
       projectId: svc.project_id,
       clientEmail: svc.client_email,
-      privateKey,               // use normalized key
+      privateKey,
     }),
-    // If you use Realtime DB, uncomment:
+    // optional:
     // databaseURL: `https://${svc.project_id}.firebaseio.com`,
+    // storageBucket: `${svc.project_id}.appspot.com`,
   });
 }
 

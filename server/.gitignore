@@ -5,3 +5,4 @@ ecosystem.config.js
 .env.development
 .env.backup
 /server/config/firebase-adminsdk.json
+server/config/firebase-adminsdk.json
