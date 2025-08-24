@@ -18,7 +18,6 @@ const app = express();
 connectDB();
 
 cloudinary.config();
-console.log(cloudinary.config().cloud_name);
 const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS.split(','),
   credentials: true,
