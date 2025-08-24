@@ -17,13 +17,8 @@ const app = express();
 
 connectDB();
 
-cloudinary.config({
-  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
-  api_key: process.env.CLOUDINARY_KEY,
-  api_secret: process.env.CLOUDINARY_SECRET,
-  secure: true,
-});
-
+cloudinary.config();
+console.log(cloudinary.config().cloud_name);
 const corsOptions = {
   origin: process.env.ALLOWED_ORIGINS.split(','),
   credentials: true,
